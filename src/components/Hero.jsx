@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Download, Github, Linkedin } from "lucide-react";
 
+const texts = [
+  "Hi, I'm M Rashid",
+  "I'm a MERN Stack Developer",
+  "I specialize in Backend Development",
+  "Real-time App Developer",
+  "Security-focused Developer",
+];
+
 export default function Hero() {
   const [typedText, setTypedText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-
-  const texts = [
-    "Hi, I'm M Rashid",
-    "I'm a MERN Stack Developer",
-    "I specialize in Backend Development",
-    "Real-time App Developer",
-    "Security-focused Developer",
-  ];
 
   useEffect(() => {
     const typingSpeed = 100;
@@ -56,7 +56,7 @@ export default function Hero() {
     }
 
     return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, textIndex]); // FIXED
+  }, [charIndex, isDeleting, textIndex]);
 
   return (
     <section
@@ -65,7 +65,6 @@ export default function Hero() {
     >
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="text-center md:text-left md:w-1/2">
-          {/* FIX: wrapper added to stop horizontal movement */}
           <div className="w-full md:w-[380px]">
             <h2 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-4 min-h-[140px] md:min-h-[100px]">
               {typedText}
@@ -109,6 +108,7 @@ export default function Hero() {
             >
               <Github className="w-6 h-6" />
             </a>
+
             <a
               href="#"
               target="_blank"
