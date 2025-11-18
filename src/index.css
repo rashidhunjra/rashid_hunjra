@@ -15,3 +15,13 @@
 .animate-pulse-cursor {
     animation: blink-caret 0.7s infinite;
 }
+
+:root {
+    --header-height: 64px;
+    /* fallback */
+}
+
+/* every section will account for header height when scrolled to */
+section {
+    scroll-margin-top: calc(var(--header-height) + 12px);
+}

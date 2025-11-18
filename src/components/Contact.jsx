@@ -32,7 +32,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 bg-slate-900 text-white relative overflow-hidden"
+      className="py-15 bg-slate-900 text-white relative overflow-hidden"
     >
       {/* Background glow circles */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-purple-600 rounded-full opacity-20 blur-3xl animate-pulse"></div>

@@ -3,7 +3,8 @@ import { Code2, Server, Database, Zap, Shield, Users } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-24 bg-slate-50">
+    // was: <section id="about" className="py-20 md:py-24 bg-slate-50">
+    <section id="about" className="scroll-mt-24 py-16 md:py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-14 md:mb-16">

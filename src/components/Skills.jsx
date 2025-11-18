@@ -50,7 +50,8 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-20 sm:py-24 bg-slate-50">
+    // was: <section id="skills" className="py-20 sm:py-24 bg-slate-50">
+    <section id="skills" className="scroll-mt-24 py-15 sm:py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14 sm:mb-16">

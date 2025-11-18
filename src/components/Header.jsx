@@ -4,7 +4,16 @@ import { Menu, X, Download } from "lucide-react";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef(null);
   const firstLinkRef = useRef(null);
+
+  const navLinks = [
+    { href: "#about", label: "About" },
+    { href: "#skills", label: "Skills" },
+    { href: "#projects", label: "Projects" },
+    { href: "#experience", label: "Experience" },
+    { href: "#contact", label: "Contact" },
+  ];
 
   // Track scroll position for glass effect
   useEffect(() => {
@@ -32,16 +41,24 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
-  ];
+  // Set CSS variable for header height for anchor scroll
+  useEffect(() => {
+    function setHeaderHeight() {
+      const h = headerRef.current?.offsetHeight || 64;
+      document.documentElement.style.setProperty("--header-height", `${h}px`);
+    }
+    setHeaderHeight();
+    const timeout = setTimeout(setHeaderHeight, 350);
+    window.addEventListener("resize", setHeaderHeight);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("resize", setHeaderHeight);
+    };
+  }, [open, scrolled]);
 
   return (
     <header
+      ref={headerRef}
       className={`w-full fixed top-0 z-50 transition-all duration-300 backdrop-blur-sm ${
         scrolled
           ? "bg-slate-900/95 shadow-lg border-b border-slate-700/50"
@@ -93,7 +110,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile overlay menu: full screen slide-up */}
+      {/* Mobile overlay menu */}
       <div
         id="mobile-menu"
         className={`lg:hidden fixed inset-0 z-40 transition-transform duration-300 ${
