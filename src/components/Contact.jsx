@@ -5,7 +5,6 @@ import {
   EMAILJS_TEMPLATE_ID,
   EMAILJS_PUBLIC_KEY,
 } from "../api";
-// Using lucide-react icons for status and links
 import { Mail, Send, AlertTriangle } from "lucide-react";
 
 export default function Contact() {
@@ -31,55 +30,56 @@ export default function Contact() {
   };
 
   return (
-    // Full-width vibrant purple background section
-    <section id="contact" className="py-20 bg-fuchsia-700 text-white">
-      {/* Increased max-width for better form prominence */}
-      <div className="max-w-xl mx-auto px-4">
-        {/* Title: Centered and white */}
-        <h3 className="text-4xl font-extrabold text-center mb-10 tracking-tight">
+    <section
+      id="contact"
+      className="py-20 bg-slate-900 text-white relative overflow-hidden"
+    >
+      {/* Background glow circles */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-purple-600 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-500 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+
+      <div className="relative max-w-3xl mx-auto px-6 sm:px-8">
+        {/* Section header */}
+        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-8">
           Let's Work Together
         </h3>
+        <div className="w-20 sm:w-24 h-1 bg-blue-600 mx-auto mb-10"></div>
 
-        {/* Form Container: Uses a slightly darker, transparent purple background for contrast */}
+        {/* Form */}
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="mt-6 grid gap-5 p-8 bg-fuchsia-800/70 rounded-xl shadow-2xl"
+          className="grid gap-4 sm:gap-6 p-6 sm:p-8 bg-slate-800/60 backdrop-blur-md rounded-2xl shadow-lg"
         >
-          {/* Input Fields: Styled for dark background (white text/border, light placeholder) */}
           <input
             name="from_name"
             required
             placeholder="Your Name *"
-            className="w-full p-4 border border-fuchsia-300 rounded-lg bg-fuchsia-900/50 text-white placeholder-fuchsia-200 focus:outline-none focus:ring-2 focus:ring-white transition duration-150"
+            className="w-full p-4 border border-slate-600 rounded-lg bg-slate-900/50 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
           />
           <input
             name="from_email"
             type="email"
             required
             placeholder="Your Email Address *"
-            className="w-full p-4 border border-fuchsia-300 rounded-lg bg-fuchsia-900/50 text-white placeholder-fuchsia-200 focus:outline-none focus:ring-2 focus:ring-white transition duration-150"
+            className="w-full p-4 border border-slate-600 rounded-lg bg-slate-900/50 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
           />
           <textarea
             name="message"
             required
             placeholder="Your Project Idea / Message *"
-            rows="6"
-            className="w-full p-4 border border-fuchsia-300 rounded-lg bg-fuchsia-900/50 text-white placeholder-fuchsia-200 focus:outline-none focus:ring-2 focus:ring-white transition duration-150 resize-none"
+            rows="5"
+            className="w-full p-4 border border-slate-600 rounded-lg bg-slate-900/50 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 resize-none"
           ></textarea>
 
-          {/* Button: White background with purple text (Primary action on a dark background) */}
           <button
             type="submit"
             disabled={status === "sending"}
-            className={`
-              px-6 py-4 text-lg font-semibold rounded-lg transition duration-300 ease-in-out mt-2 flex items-center justify-center gap-2
-              ${
-                status === "sending"
-                  ? "bg-gray-200 text-fuchsia-500 cursor-not-allowed"
-                  : "bg-white text-fuchsia-700 hover:bg-fuchsia-50 shadow-xl hover:shadow-2xl"
-              }
-            `}
+            className={`px-6 py-4 text-lg font-semibold rounded-lg transition duration-300 ease-in-out mt-2 flex items-center justify-center gap-2 ${
+              status === "sending"
+                ? "bg-gray-200 text-slate-700 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl transform hover:scale-105"
+            }`}
           >
             {status === "sending" ? (
               <>
@@ -93,26 +93,26 @@ export default function Contact() {
           </button>
 
           {status === "success" && (
-            <p className="text-center text-green-300 font-medium mt-2 flex items-center justify-center gap-2">
+            <p className="text-center text-green-400 font-medium mt-2 flex items-center justify-center gap-2">
               <Mail className="w-5 h-5" />
               Message sent successfully. I will respond soon.
             </p>
           )}
           {status === "error" && (
-            <p className="text-center text-red-300 font-medium mt-2 flex items-center justify-center gap-2">
+            <p className="text-center text-red-400 font-medium mt-2 flex items-center justify-center gap-2">
               <AlertTriangle className="w-5 h-5" />
               Send failed. Check the console for errors.
             </p>
           )}
         </form>
 
-        {/* Optional direct email line, matching the design style */}
-        <p className="text-center text-fuchsia-100 mt-6">
-          Or reach out directly:
-        </p>
-        <p className="text-center text-lg font-semibold mt-2">
-          mrashidcodes@gmail.com{" "}
-        </p>
+        {/* Direct contact info */}
+        <div className="text-center mt-8 sm:mt-10">
+          <p className="text-slate-400">Or reach out directly:</p>
+          <p className="text-white font-semibold mt-1 text-lg sm:text-xl">
+            mrashidcodes@gmail.com
+          </p>
+        </div>
       </div>
     </section>
   );

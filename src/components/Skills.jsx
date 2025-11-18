@@ -1,91 +1,120 @@
 import React from "react";
-// Import icons for visual enhancement (using Lucide)
-import { Code, Server, Cloud, Package, Box } from "lucide-react";
-
-// Original Data Array
-const data = [
-  { title: "Node.js", cat: "Backend", icon: Server },
-  { title: "Express.js", cat: "Backend", icon: Server },
-  { title: "MongoDB", cat: "Backend", icon: Server },
-  { title: "JWT", cat: "Backend", icon: Code },
-  { title: "Passport", cat: "Backend", icon: Code },
-  { title: "Socket.IO", cat: "Realtime", icon: Cloud },
-  { title: "AWS S3", cat: "Storage", icon: Cloud },
-  { title: "Cloudinary", cat: "Storage", icon: Cloud },
-  { title: "React", cat: "Frontend", icon: Code },
-  { title: "Tailwind CSS", cat: "Frontend", icon: Code },
-  { title: "Docker (basic)", cat: "Tools", icon: Box },
-  { title: "CI/CD", cat: "Tools", icon: Box },
-];
-
-// Helper function to get the corresponding Lucide icon component
-const getCategoryIcon = (category) => {
-  switch (category) {
-    case "Backend":
-      return Server;
-    case "Realtime":
-      return Cloud;
-    case "Storage":
-      return Cloud;
-    case "Frontend":
-      return Code;
-    case "Tools":
-      return Box;
-    default:
-      return Package;
-  }
-};
+import { Server, Monitor, Zap, Cloud, Wrench, Shield } from "lucide-react";
 
 export default function Skills() {
-  // Grouping the skills data by category for structured display
-  const categories = data.reduce((acc, skill) => {
-    if (!acc[skill.cat]) {
-      acc[skill.cat] = [];
-    }
+  const skillsData = [
+    { title: "Node.js", cat: "Backend", level: 85 },
+    { title: "Express.js", cat: "Backend", level: 85 },
+    { title: "MongoDB", cat: "Backend", level: 80 },
+    { title: "Mongoose", cat: "Backend", level: 80 },
+    { title: "JWT", cat: "Authentication", level: 85 },
+    { title: "Passport.js", cat: "Authentication", level: 75 },
+    { title: "Socket.IO", cat: "Real-time", level: 80 },
+    { title: "React", cat: "Frontend", level: 75 },
+    { title: "Redux", cat: "Frontend", level: 70 },
+    { title: "Tailwind CSS", cat: "Frontend", level: 85 },
+    { title: "AWS S3", cat: "Cloud", level: 70 },
+    { title: "Cloudinary", cat: "Cloud", level: 75 },
+    { title: "Git & GitHub", cat: "Tools", level: 80 },
+    { title: "Postman", cat: "Tools", level: 85 },
+  ];
+
+  const categories = skillsData.reduce((acc, skill) => {
+    if (!acc[skill.cat]) acc[skill.cat] = [];
     acc[skill.cat].push(skill);
     return acc;
   }, {});
 
+  const getCategoryColor = (cat) => {
+    const colors = {
+      Backend: "bg-blue-600",
+      Authentication: "bg-purple-600",
+      "Real-time": "bg-green-600",
+      Frontend: "bg-cyan-600",
+      Cloud: "bg-orange-600",
+      Tools: "bg-slate-600",
+    };
+    return colors[cat] || "bg-blue-600";
+  };
+
+  const getCategoryIcon = (cat) => {
+    const icons = {
+      Backend: Server,
+      Authentication: Shield,
+      "Real-time": Zap,
+      Frontend: Monitor,
+      Cloud: Cloud,
+      Tools: Wrench,
+    };
+    return icons[cat] || Server;
+  };
+
   return (
-    // Used a light gray background and border
-    <section id="skills" className="py-20 bg-gray-50 border-t border-gray-100">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Updated Title: Larger font and purple accent border */}
-        <h3 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight border-b-4 border-fuchsia-200 inline-block pb-1">
-          Core Skills
-        </h3>
+    <section id="skills" className="py-20 sm:py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-14 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            Technical Skills
+          </h2>
+          <div className="w-20 sm:w-24 h-1 bg-blue-600 mx-auto"></div>
+        </div>
 
-        <div className="mt-12 grid gap-10">
+        {/* Skill categories */}
+        <div className="space-y-10">
           {Object.keys(categories).map((category) => {
-            const CatIcon = getCategoryIcon(category);
-            return (
-              <div key={category}>
-                {/* Category Heading with icon and purple accent */}
-                <h4 className="text-2xl font-bold text-fuchsia-700 mb-6 flex items-center gap-3">
-                  <CatIcon className="w-6 h-6" />
-                  {category}
-                </h4>
+            const color = getCategoryColor(category);
+            const IconComponent = getCategoryIcon(category);
 
-                {/* Skill Cards Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {categories[category].map((s) => (
-                    <div
-                      key={s.title}
-                      // Enhanced card styling: rounded, stronger shadow, and purple hover effect
-                      className="p-5 bg-white rounded-xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl hover:border-fuchsia-500"
-                    >
-                      <h5 className="text-lg font-semibold text-gray-900">
-                        {s.title}
-                      </h5>
-                      <p className="text-sm text-fuchsia-600 mt-1 font-medium uppercase tracking-wider">
-                        {s.cat}
-                      </p>
+            return (
+              <div
+                key={category}
+                className="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200"
+              >
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 sm:mb-6 pb-3 border-b border-slate-200 flex items-center gap-3">
+                  <div
+                    className={`w-10 h-10 rounded-lg ${color} flex items-center justify-center`}
+                  >
+                    <IconComponent className="w-5 h-5 text-white" />
+                  </div>
+                  {category}
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {categories[category].map((skill) => (
+                    <div key={skill.title} className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-semibold text-slate-900">
+                          {skill.title}
+                        </span>
+                        <span className="text-sm font-bold text-slate-600">
+                          {skill.level}%
+                        </span>
+                      </div>
+
+                      <div className="h-3 bg-slate-200 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${color} rounded-full transition-all duration-1000`}
+                          style={{ width: skill.level + "%" }}
+                        ></div>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* CTA box */}
+        <div className="mt-10 sm:mt-12 text-center bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl p-6 sm:p-8 text-white">
+          <h3 className="text-xl sm:text-2xl font-bold mb-3">
+            Always Learning
+          </h3>
+          <p className="text-blue-50 max-w-2xl mx-auto text-sm sm:text-base">
+            Continuously improving my skills and exploring new technologies to
+            build better applications
+          </p>
         </div>
       </div>
     </section>
