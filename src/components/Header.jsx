@@ -64,9 +64,14 @@ export default function Header() {
           ? "bg-slate-900/95 shadow-lg border-b border-slate-700/50"
           : "bg-slate-900/80"
       }`}
+      role="banner"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between">
-        <a href="#hero" className="flex flex-col group cursor-pointer">
+        <a
+          href="#hero"
+          className="flex flex-col group cursor-pointer"
+          aria-label="Go to homepage"
+        >
           <h1 className="text-lg sm:text-2xl font-bold text-white tracking-tight group-hover:text-blue-400 transition">
             M Rashid
           </h1>
@@ -76,12 +81,13 @@ export default function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className="text-slate-300 hover:text-white font-medium transition-all duration-200 relative group"
+              aria-label={`Navigate to ${link.label} section`}
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
@@ -91,7 +97,8 @@ export default function Header() {
           <a
             href="/M_Rashid_CV.pdf"
             download
-            className="ml-4 inline-flex items-center gap-2 px-4 sm:px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="ml-4 inline-flex items-center gap-2 px-4 sm:px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg focus:ring-4 focus:ring-blue-500/50"
+            aria-label="Download resume PDF"
           >
             <Download className="w-4 h-4" />
             Resume
@@ -100,11 +107,11 @@ export default function Header() {
 
         {/* Mobile menu button */}
         <button
-          className="lg:hidden p-2 rounded-lg bg-slate-800 border border-slate-700 text-white hover:bg-slate-700 transition-all"
+          className="lg:hidden p-2 rounded-lg bg-slate-800 border border-slate-700 text-white hover:bg-slate-700 transition-all focus:ring-4 focus:ring-slate-500/50"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label="Toggle menu"
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
         >
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -119,10 +126,14 @@ export default function Header() {
             : "translate-y-full opacity-0 pointer-events-none"
         }`}
         aria-hidden={!open}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
       >
         <div
           className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm"
           onClick={() => setOpen(false)}
+          aria-label="Close menu overlay"
         />
 
         <div className="relative mx-auto max-w-3xl p-6 pt-8">
@@ -134,22 +145,23 @@ export default function Header() {
               </div>
 
               <button
-                className="p-2 rounded-md bg-slate-800 border border-slate-700 text-white"
+                className="p-2 rounded-md bg-slate-800 border border-slate-700 text-white hover:bg-slate-700 transition focus:ring-4 focus:ring-slate-500/50"
                 onClick={() => setOpen(false)}
-                aria-label="Close menu"
+                aria-label="Close navigation menu"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <nav className="px-6 pb-6 flex flex-col gap-3">
+            <nav className="px-6 pb-6 flex flex-col gap-3" aria-label="Mobile navigation">
               {navLinks.map((link, i) => (
                 <a
                   key={link.href}
                   href={link.href}
                   ref={i === 0 ? firstLinkRef : null}
                   onClick={() => setOpen(false)}
-                  className="text-slate-200 hover:text-white font-medium py-3 px-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="text-slate-200 hover:text-white hover:bg-slate-800/50 font-medium py-3 px-4 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  aria-label={`Navigate to ${link.label} section`}
                 >
                   {link.label}
                 </a>
@@ -159,7 +171,8 @@ export default function Header() {
                 href="/M_Rashid_CV.pdf"
                 download
                 onClick={() => setOpen(false)}
-                className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all"
+                className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all focus:ring-4 focus:ring-blue-500/50"
+                aria-label="Download resume PDF"
               >
                 <Download className="w-4 h-4" />
                 Download Resume
@@ -171,3 +184,4 @@ export default function Header() {
     </header>
   );
 }
+
